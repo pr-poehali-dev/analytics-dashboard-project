@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { 
   LayoutDashboard, 
   BarChart3, 
@@ -9,9 +8,9 @@ import {
 
 const Sidebar = () => {
   const menuItems = [
-    { icon: <LayoutDashboard size={20} />, label: "Дашборд", path: "/dashboard" },
-    { icon: <BarChart3 size={20} />, label: "Аналитика", path: "/analytics" },
-    { icon: <Users size={20} />, label: "Пользователи", path: "/users" },
+    { icon: <LayoutDashboard size={20} />, label: "Дашборд", isActive: true },
+    { icon: <BarChart3 size={20} />, label: "Аналитика", isActive: false },
+    { icon: <Users size={20} />, label: "Пользователи", isActive: false },
   ];
 
   return (
@@ -25,13 +24,16 @@ const Sidebar = () => {
         <ul className="space-y-2">
           {menuItems.map((item, index) => (
             <li key={index}>
-              <Link
-                to={item.path}
-                className="flex items-center py-2 px-4 rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+              <button
+                className={`flex items-center w-full py-2 px-4 rounded-md transition-colors ${
+                  item.isActive
+                    ? "bg-sidebar-accent text-sidebar-accent-foreground"
+                    : "hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground"
+                }`}
               >
                 <span className="mr-3">{item.icon}</span>
                 {item.label}
-              </Link>
+              </button>
             </li>
           ))}
         </ul>
@@ -40,17 +42,16 @@ const Sidebar = () => {
       <div className="border-t border-sidebar-border pt-4">
         <ul className="space-y-2">
           <li>
-            <Link
-              to="/settings"
-              className="flex items-center py-2 px-4 rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+            <button
+              className="flex items-center w-full py-2 px-4 rounded-md hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground transition-colors"
             >
               <span className="mr-3"><Settings size={20} /></span>
               Настройки
-            </Link>
+            </button>
           </li>
           <li>
             <button
-              className="w-full flex items-center py-2 px-4 rounded-md hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors"
+              className="flex items-center w-full py-2 px-4 rounded-md hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground transition-colors"
             >
               <span className="mr-3"><LogOut size={20} /></span>
               Выйти
